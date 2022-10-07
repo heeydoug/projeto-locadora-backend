@@ -2,11 +2,15 @@ package com.douglas;
 
 import com.douglas.model.Ator;
 import com.douglas.model.Classe;
+import com.douglas.model.Cliente;
 import com.douglas.model.Diretor;
+import com.douglas.model.Item;
 import com.douglas.model.Titulo;
 import com.douglas.repository.AtorRepository;
 import com.douglas.repository.ClasseRepository;
+import com.douglas.repository.ClienteRepository;
 import com.douglas.repository.DiretorRepository;
+import com.douglas.repository.ItemRepository;
 import com.douglas.repository.TituloRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -28,7 +32,9 @@ public class ProjetoLocadoraBackendApplication {
 	CommandLineRunner initDatabase(AtorRepository atorRepository,
 								   DiretorRepository diretorRepository,
 								   ClasseRepository classeRepository,
-								   TituloRepository tituloRepository) {
+								   TituloRepository tituloRepository,
+								   ItemRepository itemRepository,
+								   ClienteRepository clienteRepository) {
 		return args -> {
 
 			Ator a = new Ator();
@@ -69,6 +75,22 @@ public class ProjetoLocadoraBackendApplication {
 
 			tit.setAtores(listaAtor);
 
+			//Item
+
+			Item item = new Item();
+			item.setNumserie(69);
+			item.setDtaquisicao(LocalDate.now());
+			item.setTipoItem("Tipo de item teste");
+			item.setTitulo(tit);
+
+			//Cliente
+
+			Cliente cliente = new Cliente();
+			cliente.setNumeroInscricao(432432);
+			cliente.setNome("Márcia Cristina");
+			cliente.setDataNascimento(LocalDate.now());
+			cliente.setSexo("Feminino");
+			cliente.setEstahAtivo("Sim");
 
 
 			atorRepository.save(a);
@@ -81,6 +103,10 @@ public class ProjetoLocadoraBackendApplication {
 			classeRepository.save(f);
 
 			tituloRepository.save(tit);
+
+			itemRepository.save(item);
+
+			clienteRepository.save(cliente);
 
 		};
 	}
