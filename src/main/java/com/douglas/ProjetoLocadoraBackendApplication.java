@@ -5,12 +5,14 @@ import com.douglas.model.Classe;
 import com.douglas.model.Cliente;
 import com.douglas.model.Diretor;
 import com.douglas.model.Item;
+import com.douglas.model.Socio;
 import com.douglas.model.Titulo;
 import com.douglas.repository.AtorRepository;
 import com.douglas.repository.ClasseRepository;
 import com.douglas.repository.ClienteRepository;
 import com.douglas.repository.DiretorRepository;
 import com.douglas.repository.ItemRepository;
+import com.douglas.repository.SocioRepository;
 import com.douglas.repository.TituloRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -34,7 +36,8 @@ public class ProjetoLocadoraBackendApplication {
 								   ClasseRepository classeRepository,
 								   TituloRepository tituloRepository,
 								   ItemRepository itemRepository,
-								   ClienteRepository clienteRepository) {
+								   ClienteRepository clienteRepository,
+								   SocioRepository socioRepository) {
 		return args -> {
 
 			Ator a = new Ator();
@@ -92,6 +95,25 @@ public class ProjetoLocadoraBackendApplication {
 			cliente.setSexo("Feminino");
 			cliente.setEstahAtivo("Sim");
 
+			//Socio
+
+			Socio socio = new Socio();
+			socio.setNumeroInscricao(543435435);
+			socio.setNome("Jocinei Alemida");
+			socio.setCpf("165.373.887-16");
+			socio.setDataNascimento(LocalDate.now());
+			socio.setEndereco("Rua das Flores");
+			socio.setTelefone("27-9999-9999");
+			socio.setSexo("Masculino");
+
+			List<Cliente> listaDependentes = new ArrayList<Cliente>();
+
+			listaDependentes.add(cliente);
+
+			socio.setDependentes(listaDependentes);
+
+			socio.setEstahAtivo("Sim");
+
 
 			atorRepository.save(a);
 			atorRepository.save(b);
@@ -107,6 +129,8 @@ public class ProjetoLocadoraBackendApplication {
 			itemRepository.save(item);
 
 			clienteRepository.save(cliente);
+
+			socioRepository.save(socio);
 
 		};
 	}
