@@ -40,97 +40,209 @@ public class ProjetoLocadoraBackendApplication {
 								   SocioRepository socioRepository) {
 		return args -> {
 
-			Ator a = new Ator();
-			a.setNome("João Felipe");
-			Ator b = new Ator();
-			b.setNome("Douglas");
+			//--------------------------------------------------------
+			//Ator
 
-			Diretor c = new Diretor();
-			c.setNome("Clarisse Diniz");
-			Diretor d = new Diretor();
-			d.setNome("Filipe Mattos");
+			Ator ator1 = new Ator();
+			ator1.setNome("João Felipe");
 
-			Classe e = new Classe();
-			e.setNome("Classe1");
-			e.setData(LocalDate.now());
-			e.setValor(26);
+			Ator ator2 = new Ator();
+			ator2.setNome("Douglas Almeida");
 
-			Classe f = new Classe();
-			f.setNome("Classe2");
-			f.setData(LocalDate.now());
-			f.setValor(27);
+			Ator ator3 = new Ator();
+			ator3.setNome("Josué Lobo");
+
+			Ator ator4 = new Ator();
+			ator4.setNome("Layla Maria");
+
+			Ator ator5 = new Ator();
+			ator5.setNome("Edson Lima");
 
 
-			//Aqui Titulo
+			//--------------------------------------------------------
+			//Diretor
 
-			Titulo tit = new Titulo();
-			tit.setNome("Titulo Teste");
-			tit.setAno(LocalDate.now());
-			tit.setSinopse("Sinopse Teste");
-			tit.setCategoria("Categoria teste");
-			tit.setClasse(e);
-			tit.setDiretor(c);
+			Diretor diretor1 = new Diretor();
+			diretor1.setNome("Clarisse Diniz");
 
-			List<Ator> listaAtor = new ArrayList<Ator>();
+			Diretor diretor2 = new Diretor();
+			diretor2.setNome("Filipe Mattos");
 
-			listaAtor.add(a);
-			listaAtor.add(b);
+			Diretor diretor3 = new Diretor();
+			diretor3.setNome("Matheus Martins");
 
-			tit.setAtores(listaAtor);
+			Diretor diretor4 = new Diretor();
+			diretor4.setNome("João Kleber");
 
+			Diretor diretor5 = new Diretor();
+			diretor5.setNome("Isabella Corrêa");
+
+
+			//--------------------------------------------------------
+			//Classes
+
+			Classe classe1 = new Classe();
+			classe1.setNome("Bronze");
+			classe1.setData(LocalDate.now());
+			classe1.setValor(15);
+
+			Classe classe2 = new Classe();
+			classe2.setNome("Ferro");
+			classe2.setData(LocalDate.now());
+			classe2.setValor(20);
+
+			Classe classe3 = new Classe();
+			classe3.setNome("Ouro");
+			classe3.setData(LocalDate.now());
+			classe3.setValor(25);
+
+			Classe classe4 = new Classe();
+			classe4.setNome("Platina");
+			classe4.setData(LocalDate.now());
+			classe4.setValor(35);
+
+			Classe classe5 = new Classe();
+			classe5.setNome("Diamante");
+			classe5.setData(LocalDate.now());
+			classe5.setValor(40);
+
+
+			//--------------------------------------------------------
+			//Titulo
+
+			Titulo titulo1 = new Titulo();
+			titulo1.setNome("A viagem de Chihiro");
+			titulo1.setAno(LocalDate.now());
+			titulo1.setSinopse("Sinopse Sinopse");
+			titulo1.setCategoria("Animação");
+			titulo1.setClasse(classe5);
+			titulo1.setDiretor(diretor5);
+
+			List<Ator> listaAtor1 = new ArrayList<>();
+			listaAtor1.add(ator1);
+			listaAtor1.add(ator2);
+			listaAtor1.add(ator3);
+
+			titulo1.setAtores(listaAtor1);
+
+			Titulo titulo2 = new Titulo();
+			titulo2.setNome("O Castelo Animado");
+			titulo2.setAno(LocalDate.now());
+			titulo2.setSinopse("Sinopse Sinopse");
+			titulo2.setCategoria("Animação");
+			titulo2.setClasse(classe4);
+			titulo2.setDiretor(diretor1);
+
+			List<Ator> listaAtor2 = new ArrayList<>();
+			listaAtor2.add(ator4);
+			listaAtor2.add(ator5);
+
+			titulo2.setAtores(listaAtor2);
+
+
+
+			//--------------------------------------------------------
 			//Item
 
-			Item item = new Item();
-			item.setNumserie(69);
-			item.setDtaquisicao(LocalDate.now());
-			item.setTipoItem("Tipo de item teste");
-			item.setTitulo(tit);
+			Item item1 = new Item();
+			item1.setNumserie(453324);
+			item1.setDtaquisicao(LocalDate.now());
+			item1.setTipoItem("Item 1 Teste");
+			item1.setTitulo(titulo1);
 
+			Item item2 = new Item();
+			item2.setNumserie(537823);
+			item2.setDtaquisicao(LocalDate.now());
+			item2.setTipoItem("Item 2 Teste");
+			item2.setTitulo(titulo2);
+
+
+			//--------------------------------------------------------
 			//Cliente
 
-			Cliente cliente = new Cliente();
-			cliente.setNumeroInscricao(432432);
-			cliente.setNome("Márcia Cristina");
-			cliente.setDataNascimento(LocalDate.now());
-			cliente.setSexo("Feminino");
-			cliente.setEstahAtivo("Sim");
+			Cliente cliente1 = new Cliente();
+			cliente1.setNumeroInscricao(4324342);
+			cliente1.setNome("Márcia Cristina");
+			cliente1.setDataNascimento(LocalDate.now());
+			cliente1.setSexo("Feminino");
+			cliente1.setEstahAtivo("Sim");
 
+			Cliente cliente2 = new Cliente();
+			cliente2.setNumeroInscricao(6537432);
+			cliente2.setNome("Jonatha Silva");
+			cliente2.setDataNascimento(LocalDate.now());
+			cliente2.setSexo("Masculino");
+			cliente2.setEstahAtivo("Sim");
+
+
+			//--------------------------------------------------------
 			//Socio
 
-			Socio socio = new Socio();
-			socio.setNumeroInscricao(543435435);
-			socio.setNome("Jocinei Alemida");
-			socio.setCpf("165.373.887-16");
-			socio.setDataNascimento(LocalDate.now());
-			socio.setEndereco("Rua das Flores");
-			socio.setTelefone("27-9999-9999");
-			socio.setSexo("Masculino");
+			Socio socio1 = new Socio();
+			socio1.setNumeroInscricao(543435435);
+			socio1.setNome("Jocinei Almeida");
+			socio1.setCpf("165.373.887-16");
+			socio1.setDataNascimento(LocalDate.now());
+			socio1.setEndereco("Rua das Flores");
+			socio1.setTelefone("27-9999-9999");
+			socio1.setSexo("Masculino");
 
-			List<Cliente> listaDependentes = new ArrayList<Cliente>();
+			List<Cliente> listaDependentes1 = new ArrayList<>();
 
-			listaDependentes.add(cliente);
+			listaDependentes1.add(cliente2);
 
-			socio.setDependentes(listaDependentes);
+			socio1.setDependentes(listaDependentes1);
+			socio1.setEstahAtivo("Sim");
 
-			socio.setEstahAtivo("Sim");
 
 
-			atorRepository.save(a);
-			atorRepository.save(b);
+			//--------------------------------------------------------
+			//Ator
+			atorRepository.save(ator1);
+			atorRepository.save(ator2);
+			atorRepository.save(ator3);
+			atorRepository.save(ator4);
+			atorRepository.save(ator5);
 
-			diretorRepository.save(c);
-			diretorRepository.save(d);
+			//--------------------------------------------------------
+			//Diretor
+			diretorRepository.save(diretor1);
+			diretorRepository.save(diretor2);
+			diretorRepository.save(diretor3);
+			diretorRepository.save(diretor4);
+			diretorRepository.save(diretor5);
 
-			classeRepository.save(e);
-			classeRepository.save(f);
+			//--------------------------------------------------------
+			//Classes
+			classeRepository.save(classe1);
+			classeRepository.save(classe2);
+			classeRepository.save(classe3);
+			classeRepository.save(classe4);
+			classeRepository.save(classe5);
 
-			tituloRepository.save(tit);
 
-			itemRepository.save(item);
+			//--------------------------------------------------------
+			//Título
+			tituloRepository.save(titulo1);
+			tituloRepository.save(titulo2);
 
-			clienteRepository.save(cliente);
 
-			socioRepository.save(socio);
+			//--------------------------------------------------------
+			//Item
+			itemRepository.save(item1);
+			itemRepository.save(item2);
+
+
+			//--------------------------------------------------------
+			//Cliente
+			clienteRepository.save(cliente1);
+			clienteRepository.save(cliente2);
+
+
+			//--------------------------------------------------------
+			//Sócio
+			socioRepository.save(socio1);
+
 
 		};
 	}

@@ -1,5 +1,6 @@
 package com.douglas.controller;
 
+import com.douglas.exceptions.RecursoNaoEncontradoException;
 import com.douglas.model.Cliente;
 import com.douglas.repository.ClienteRepository;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ClienteController {
 
+    private static final String recurso = "Cliente";
     private final ClienteRepository clienteRepository;
 
     //Listar
@@ -36,7 +38,7 @@ public class ClienteController {
     public ResponseEntity<Cliente> procurarPorID(@PathVariable Long id) {
         return clienteRepository.findById(id)
                 .map(recordFound -> ResponseEntity.ok().body(recordFound))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new RecursoNaoEncontradoException(recurso));
     }
 
     //Criar
@@ -61,7 +63,7 @@ public class ClienteController {
                     Cliente atualizado = clienteRepository.save(recordFound);
                     return ResponseEntity.ok().body(atualizado);
                 })
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new RecursoNaoEncontradoException(recurso));
     }
 
 

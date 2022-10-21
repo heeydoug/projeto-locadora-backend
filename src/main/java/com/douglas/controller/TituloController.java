@@ -1,5 +1,6 @@
 package com.douglas.controller;
 
+import com.douglas.exceptions.RecursoNaoEncontradoException;
 import com.douglas.model.Titulo;
 import com.douglas.repository.TituloRepository;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class TituloController {
 
+    private static final String recurso = "Título";
     private final TituloRepository tituloRepository;
 
     @GetMapping
@@ -26,7 +28,7 @@ public class TituloController {
     public ResponseEntity<Titulo> procurarPorID(@PathVariable Long id) {
         return tituloRepository.findById(id)
                 .map(recordFound -> ResponseEntity.ok().body(recordFound))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new RecursoNaoEncontradoException(recurso));
     }
 
     //Criar
@@ -51,7 +53,7 @@ public class TituloController {
                     Titulo atualizado = tituloRepository.save(recordFound);
                     return ResponseEntity.ok().body(atualizado);
                 })
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new RecursoNaoEncontradoException(recurso));
     }
 
     //Deletar

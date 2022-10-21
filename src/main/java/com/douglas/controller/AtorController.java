@@ -1,5 +1,6 @@
 package com.douglas.controller;
 
+import com.douglas.exceptions.RecursoNaoEncontradoException;
 import com.douglas.model.Ator;
 import com.douglas.repository.AtorRepository;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class AtorController{
 
+    private static final String recurso = "Ator";
     private final AtorRepository atorRepository;
 
     //Listar
@@ -27,7 +29,7 @@ public class AtorController{
     public ResponseEntity<Ator> procurarPorID(@PathVariable Long id) {
         return atorRepository.findById(id)
                 .map(recordFound -> ResponseEntity.ok().body(recordFound))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new RecursoNaoEncontradoException(recurso));
     }
 
     //Criar
@@ -47,7 +49,7 @@ public class AtorController{
                     Ator atualizado = atorRepository.save(recordFound);
                     return ResponseEntity.ok().body(atualizado);
                 })
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new RecursoNaoEncontradoException(recurso));
     }
 
 

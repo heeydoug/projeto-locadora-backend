@@ -1,6 +1,7 @@
 package com.douglas.controller;
 
 
+import com.douglas.exceptions.RecursoNaoEncontradoException;
 import com.douglas.model.Cliente;
 import com.douglas.model.Socio;
 import com.douglas.repository.SocioRepository;
@@ -25,6 +26,7 @@ import java.util.List;
 @AllArgsConstructor
 public class SocioController {
 
+    private static final String recurso = "Sócio";
     private final SocioRepository socioRepository;
 
     //Listar
@@ -38,7 +40,7 @@ public class SocioController {
     public ResponseEntity<Socio> procurarPorID(@PathVariable Long id) {
         return socioRepository.findById(id)
                 .map(recordFound -> ResponseEntity.ok().body(recordFound))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new RecursoNaoEncontradoException(recurso));
     }
 
     //Criar
@@ -67,7 +69,7 @@ public class SocioController {
                     Socio atualizado = socioRepository.save(recordFound);
                     return ResponseEntity.ok().body(atualizado);
                 })
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new RecursoNaoEncontradoException(recurso));
     }
 
 

@@ -1,5 +1,6 @@
 package com.douglas.controller;
 
+import com.douglas.exceptions.RecursoNaoEncontradoException;
 import com.douglas.model.Diretor;
 import com.douglas.repository.DiretorRepository;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class DiretorController{
 
+    private static final String recurso = "Diretor";
     private final DiretorRepository diretorRepository;
 
     //Listar
@@ -27,7 +29,7 @@ public class DiretorController{
     public ResponseEntity<Diretor> procurarPorID(@PathVariable Long id) {
         return diretorRepository.findById(id)
                 .map(recordFound -> ResponseEntity.ok().body(recordFound))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new RecursoNaoEncontradoException(recurso));
     }
 
     //Criar
@@ -47,7 +49,7 @@ public class DiretorController{
                     Diretor atualizado = diretorRepository.save(recordFound);
                     return ResponseEntity.ok().body(atualizado);
                 })
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new RecursoNaoEncontradoException(recurso));
     }
 
 

@@ -1,5 +1,6 @@
 package com.douglas.controller;
 
+import com.douglas.exceptions.RecursoNaoEncontradoException;
 import com.douglas.model.Ator;
 import com.douglas.model.Classe;
 import com.douglas.repository.ClasseRepository;
@@ -24,6 +25,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ClasseController {
 
+    private static final String recurso = "Classe";
     private final ClasseRepository classeRepository;
 
     //Listar
@@ -37,7 +39,7 @@ public class ClasseController {
     public ResponseEntity<Classe> procurarPorID(@PathVariable Long id) {
         return classeRepository.findById(id)
                 .map(recordFound -> ResponseEntity.ok().body(recordFound))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new RecursoNaoEncontradoException(recurso));
     }
 
     //Criar
@@ -59,7 +61,7 @@ public class ClasseController {
                     Classe atualizado = classeRepository.save(recordFound);
                     return ResponseEntity.ok().body(atualizado);
                 })
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new RecursoNaoEncontradoException(recurso));
     }
 
 

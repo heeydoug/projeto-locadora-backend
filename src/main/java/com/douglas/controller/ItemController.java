@@ -1,5 +1,6 @@
 package com.douglas.controller;
 
+import com.douglas.exceptions.RecursoNaoEncontradoException;
 import com.douglas.model.Item;
 import com.douglas.model.Titulo;
 import com.douglas.repository.ItemRepository;
@@ -25,6 +26,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ItemController {
 
+    private static final String recurso = "Item";
     private final ItemRepository itemRepository;
 
     @GetMapping
@@ -37,7 +39,7 @@ public class ItemController {
     public ResponseEntity<Item> procurarPorID(@PathVariable Long id) {
         return itemRepository.findById(id)
                 .map(recordFound -> ResponseEntity.ok().body(recordFound))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new RecursoNaoEncontradoException(recurso));
     }
 
     //Criar
@@ -60,7 +62,7 @@ public class ItemController {
                     Item atualizado = itemRepository.save(recordFound);
                     return ResponseEntity.ok().body(atualizado);
                 })
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(() -> new RecursoNaoEncontradoException(recurso));
     }
 
     //Deletar
